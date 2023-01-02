@@ -1,4 +1,4 @@
-package com.peterchege.gamesapp.ui.theme
+package com.peterchege.gamesapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

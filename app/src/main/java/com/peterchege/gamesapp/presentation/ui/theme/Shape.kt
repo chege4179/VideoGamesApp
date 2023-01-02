@@ -1,4 +1,4 @@
-package com.peterchege.gamesapp.ui.theme
+package com.peterchege.gamesapp.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

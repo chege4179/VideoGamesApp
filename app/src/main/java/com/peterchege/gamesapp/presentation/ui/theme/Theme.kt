@@ -1,4 +1,4 @@
-package com.peterchege.gamesapp.ui.theme
+package com.peterchege.gamesapp.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
