@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.peterchege.gamesapp.data.api.RawgApi
+import com.peterchege.gamesapp.data.room.database.VideoGamesAppDatabase
 import com.peterchege.gamesapp.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -26,6 +27,16 @@ object AppModule {
             .baseUrl(Constants.BASE_URL)
             .build()
             .create(RawgApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideVideoGamesAppDatabase(app: Application): VideoGamesAppDatabase {
+        return Room.databaseBuilder(
+            app,
+            VideoGamesAppDatabase::class.java,
+            Constants.DATABASE_NAME
+        ).build()
     }
 
 }
