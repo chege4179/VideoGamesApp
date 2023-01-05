@@ -1,6 +1,8 @@
 package com.peterchege.gamesapp.data.api.responses.game_models
 
-data class Result(
+
+
+data class NetworkGame(
     val added: Int,
     val added_by_status: AddedByStatus,
     val background_image: String,

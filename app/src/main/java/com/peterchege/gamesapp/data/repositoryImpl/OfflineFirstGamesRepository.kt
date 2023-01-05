@@ -8,7 +8,8 @@ import javax.inject.Inject
 class OfflineFirstGamesRepository @Inject constructor(
     private val api:RawgApi
 ) :GameRepository{
-    override suspend fun getGames(page_size:Int,page:Int): GetGamesResponse {
-        return api.getGames(pageSize = page_size, page = page)
+
+    override suspend fun getGamesStream(pageSize:Int,page:Int): GetGamesResponse {
+        return api.getGames(pageSize = pageSize, page = page)
     }
 }

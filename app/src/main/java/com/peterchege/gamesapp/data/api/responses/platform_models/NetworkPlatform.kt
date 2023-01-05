@@ -1,10 +1,9 @@
 package com.peterchege.gamesapp.data.api.responses.platform_models
 
-import com.peterchege.gamesapp.data.api.responses.platform_models.Game
 import com.peterchege.gamesapp.domain.models.Platform
 
 data class NetworkPlatform(
-    val games: List<Game>,
+    val games: List<PlatformGame>,
     val games_count: Int,
     val id: Int,
     val image: String?,

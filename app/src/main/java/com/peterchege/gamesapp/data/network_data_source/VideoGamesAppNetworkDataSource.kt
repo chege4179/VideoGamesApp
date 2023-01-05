@@ -16,4 +16,9 @@ class VideoGamesAppNetworkDataSource @Inject constructor(
             .map { it.asExternalModel() }
     }
 
+//    suspend fun getGamesNetwork(pageSize:Int,page :Int){
+//        return api.getGames(pageSize = pageSize,page = page)
+//
+//    }
+
 }
