@@ -71,6 +71,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     // view model
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
@@ -126,6 +127,36 @@ dependencies {
     //paging 3
     implementation ("androidx.paging:paging-runtime-ktx:3.1.1")
     implementation ("androidx.paging:paging-compose:1.0.0-alpha17")
+
+
+    // Local unit tests
+    testImplementation ("androidx.test:core:1.5.0")
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation ("com.google.truth:truth:1.1.3")
+    testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.3")
+    testImplementation ("io.mockk:mockk:1.10.5")
+    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.4.0-alpha03")
+
+    // Instrumentation tests
+    androidTestImplementation ("com.google.dagger:hilt-android-testing:2.44.2")
+    kaptAndroidTest ("com.google.dagger:hilt-android-compiler:2.44.2")
+    androidTestImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation ("com.google.truth:truth:1.1.3")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation ("androidx.test:core-ktx:1.5.0")
+    androidTestImplementation ("com.squareup.okhttp3:mockwebserver:4.9.3")
+    androidTestImplementation ("io.mockk:mockk-android:1.10.5")
+    androidTestImplementation ("androidx.test:runner:1.5.2")
+    androidTestImplementation ("com.linkedin.dexmaker:dexmaker-mockito:2.28.3")
+
+    
+    
+    
+    
 
 
 }

@@ -29,3 +29,16 @@ fun PlatformEntity.asExternalModel(): Platform {
         year_end = year_end,
     )
 }
+
+fun Platform.asDatabaseEntity():PlatformEntity{
+    return PlatformEntity(
+        id = id,
+        name = name,
+        slug = slug,
+        games_count = games_count,
+        image_background = image_background,
+        image = image,
+        year_start = year_start,
+        year_end = year_end,
+    )
+}

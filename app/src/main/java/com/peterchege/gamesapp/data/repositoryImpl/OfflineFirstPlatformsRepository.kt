@@ -14,8 +14,13 @@ class OfflineFirstPlatformsRepository @Inject constructor(
 
 ): PlatformsRepository {
     override suspend fun getPlatformsStream(pageSize:Int, page:Int): List<Platform> {
-        return networkDataSource.getPlatforms(pageSize = pageSize,page = page)
+        val localPlatforms = localDataSource.getPlatformsFromDB()
+        return if (localPlatforms.isEmpty()){
+            localDataSource.bulkInsertPlatforms(networkDataSource.getPlatforms(pageSize = pageSize,page = page))
+            networkDataSource.getPlatforms(pageSize = pageSize,page = page)
+
+        }else{
+            localDataSource.getPlatformsFromDB()
+        }
     }
-
-
 }
