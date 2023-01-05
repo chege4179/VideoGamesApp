@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.peterchege.gamesapp.presentation.ui.screens.BottomTabNavigation
+import com.peterchege.gamesapp.presentation.ui.screens.games_screen.GamesScreen
 import com.peterchege.gamesapp.presentation.ui.screens.search_games_screen.SearchGamesScreen
 
 import com.peterchege.gamesapp.util.Screens
@@ -30,7 +31,11 @@ fun AppNavigation(
             SearchGamesScreen(navController = navController)
 
         }
+        composable(
+            route = Screens.GAME_SCREEN + "/{id}",
+        ){
+            GamesScreen(navController = navController)
+
+        }
     }
-
-
 }

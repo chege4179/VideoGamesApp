@@ -2,14 +2,20 @@ package com.peterchege.gamesapp.data.repositoryImpl
 
 import com.peterchege.gamesapp.data.api.RawgApi
 import com.peterchege.gamesapp.data.api.responses.game_models.GetGamesResponse
+import com.peterchege.gamesapp.data.api.responses.single_game_model.SingleGame
+import com.peterchege.gamesapp.data.network_data_source.VideoGamesAppNetworkDataSource
 import com.peterchege.gamesapp.domain.repository.GameRepository
 import javax.inject.Inject
 
 class OfflineFirstGamesRepository @Inject constructor(
-    private val api:RawgApi
+    private val networkDataSource: VideoGamesAppNetworkDataSource,
 ) :GameRepository{
 
     override suspend fun getGamesStream(pageSize:Int,page:Int): GetGamesResponse {
-        return api.getGames(pageSize = pageSize, page = page)
+        return networkDataSource.getGamesNetwork(pageSize = pageSize, page = page)
+    }
+
+    override suspend fun getGameById(id: String): SingleGame {
+        return networkDataSource.getGameById(id = id)
     }
 }

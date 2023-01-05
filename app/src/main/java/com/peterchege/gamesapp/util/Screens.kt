@@ -7,4 +7,5 @@ object Screens {
     const val ALL_GAMES_SCREEN = "ALL_GAMES_SCREEN"
     const val ALL_PLATFORMS_SCREEN = "ALL_PLATFORMS_SCREEN"
     const val SEARCH_GAMES_SCREEN = "SEARCH_GAMES_SCREEN"
+    const val GAME_SCREEN = "GAME_SCREEN"
 }

@@ -1,8 +1,11 @@
 package com.peterchege.gamesapp.data.network_data_source
 
 import com.peterchege.gamesapp.data.api.RawgApi
+import com.peterchege.gamesapp.data.api.responses.game_models.GetGamesResponse
+import com.peterchege.gamesapp.data.api.responses.game_models.NetworkGame
 import com.peterchege.gamesapp.data.api.responses.platform_models.NetworkPlatform
 import com.peterchege.gamesapp.data.api.responses.platform_models.asExternalModel
+import com.peterchege.gamesapp.data.api.responses.single_game_model.SingleGame
 import com.peterchege.gamesapp.domain.models.Platform
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,9 +19,13 @@ class VideoGamesAppNetworkDataSource @Inject constructor(
             .map { it.asExternalModel() }
     }
 
-//    suspend fun getGamesNetwork(pageSize:Int,page :Int){
-//        return api.getGames(pageSize = pageSize,page = page)
-//
-//    }
+    suspend fun getGamesNetwork(pageSize:Int,page :Int):GetGamesResponse{
+        return api.getGames(pageSize = pageSize,page = page)
+
+    }
+
+    suspend fun getGameById(id:String):SingleGame{
+        return api.getGameById(id = id)
+    }
 
 }

@@ -103,10 +103,11 @@ fun AllGamesScreen(
 
             ) {
                 items(gamesData.itemCount) { index ->
-                    gamesData[index]?.let {
+                    gamesData[index]?.let { it ->
                         GamesCard(
                             game = it,
                             onNavigateToGameScreen = {
+                                navController.navigate(Screens.GAME_SCREEN + "/${it}")
 
                             })
                     }
