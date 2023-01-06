@@ -2,6 +2,7 @@ package com.peterchege.gamesapp.data.api
 
 import com.peterchege.gamesapp.data.api.responses.game_models.GetGamesResponse
 import com.peterchege.gamesapp.data.api.responses.platform_models.GetPlatformResponse
+import com.peterchege.gamesapp.data.api.responses.search_game_models.SearchGameResponse
 import com.peterchege.gamesapp.data.api.responses.single_game_model.SingleGame
 import com.peterchege.gamesapp.util.Constants
 import retrofit2.http.GET
@@ -31,4 +32,13 @@ interface RawgApi {
         @Path("id") id:String,
         @Query("key") apiKey:String = Constants.API_KEY
     ):SingleGame
+
+
+    @GET(value = "games")
+    suspend fun searchGames(
+        @Query("key") apiKey:String = Constants.API_KEY,
+        @Query("page_size") pageSize:Int,
+        @Query("page") page : Int,
+        @Query("search") searchTerm :String,
+    ): SearchGameResponse
 }

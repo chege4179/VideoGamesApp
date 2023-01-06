@@ -7,6 +7,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -22,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -33,6 +36,7 @@ import coil.request.ImageRequest
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.peterchege.gamesapp.presentation.ui.components.GamePlatformCard
 import com.peterchege.gamesapp.util.Screens
 import kotlinx.coroutines.launch
 
@@ -68,61 +72,173 @@ fun GamesScreen(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    if (game.background_image == null || game.background_image_additional == null){
+                    if (game.background_image == null && game.background_image_additional == null){
                         item{
                             Text(text = "No Image available")
                         }
 
                     }else{
-                        val images = listOf<String>(game.background_image,game.background_image_additional)
-                        item {
-                            val pagerState1 = rememberPagerState(initialPage = 0)
-                            val coroutineScope = rememberCoroutineScope()
-                            HorizontalPager(
-                                count = images.size,
-                                state = pagerState1
-                            ) { image ->
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                ){
-                                    SubcomposeAsyncImage(
-                                        model = images[image],
-                                        loading = {
-                                            Box(modifier = Modifier.fillMaxSize()) {
-                                                CircularProgressIndicator(
-                                                    modifier = Modifier.align(
-                                                        Alignment.Center
-                                                    )
-                                                )
-                                            }
-                                        },
-                                        contentScale = ContentScale.Crop,
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(300.dp),
-                                        contentDescription = "Game Images"
-                                    )
+                        if(game.background_image_additional == null && game.background_image != null){
+                            val images = listOf<String>(game.background_image)
+                            item {
+                                val pagerState1 = rememberPagerState(initialPage = 0)
+                                val coroutineScope = rememberCoroutineScope()
+                                HorizontalPager(
+                                    count = images.size,
+                                    state = pagerState1
+                                ) { image ->
                                     Box(
-                                        modifier = Modifier
-                                            .padding(10.dp)
-                                            .width(45.dp)
-                                            .align(Alignment.TopEnd)
-                                            .height(25.dp)
-                                            .clip(RoundedCornerShape(15.dp))
-                                            .background(Color.White)
-
+                                        modifier = Modifier.fillMaxWidth()
                                     ){
-                                        Text(
+                                        SubcomposeAsyncImage(
+                                            model = images[image],
+                                            loading = {
+                                                Box(modifier = Modifier.fillMaxSize()) {
+                                                    CircularProgressIndicator(
+                                                        modifier = Modifier.align(
+                                                            Alignment.Center
+                                                        )
+                                                    )
+                                                }
+                                            },
+                                            contentScale = ContentScale.Crop,
                                             modifier = Modifier
-                                                .align(Alignment.Center)
-                                                .padding(horizontal = 3.dp),
-                                            textAlign = TextAlign.Start,
-                                            fontSize = 17.sp,
-                                            text = "${image + 1}/${images.size}"
+                                                .fillMaxWidth()
+                                                .height(300.dp),
+                                            contentDescription = "Game Images"
                                         )
+                                        Box(
+                                            modifier = Modifier
+                                                .padding(10.dp)
+                                                .width(45.dp)
+                                                .align(Alignment.TopEnd)
+                                                .height(25.dp)
+                                                .clip(RoundedCornerShape(15.dp))
+                                                .background(Color.White)
+
+                                        ){
+                                            Text(
+                                                modifier = Modifier
+                                                    .align(Alignment.Center)
+                                                    .padding(horizontal = 3.dp),
+                                                textAlign = TextAlign.Start,
+                                                fontSize = 17.sp,
+                                                text = "${image + 1}/${images.size}"
+                                            )
+                                        }
                                     }
                                 }
                             }
+                        }else if(game.background_image_additional != null && game.background_image != null){
+                            val images = listOf<String>(game.background_image,game.background_image_additional)
+                            item {
+                                val pagerState1 = rememberPagerState(initialPage = 0)
+                                val coroutineScope = rememberCoroutineScope()
+                                HorizontalPager(
+                                    count = images.size,
+                                    state = pagerState1
+                                ) { image ->
+                                    Box(
+                                        modifier = Modifier.fillMaxWidth()
+                                    ){
+                                        SubcomposeAsyncImage(
+                                            model = images[image],
+                                            loading = {
+                                                Box(modifier = Modifier.fillMaxSize()) {
+                                                    CircularProgressIndicator(
+                                                        modifier = Modifier.align(
+                                                            Alignment.Center
+                                                        )
+                                                    )
+                                                }
+                                            },
+                                            contentScale = ContentScale.Crop,
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .height(300.dp),
+                                            contentDescription = "Game Images"
+                                        )
+                                        Box(
+                                            modifier = Modifier
+                                                .padding(10.dp)
+                                                .width(45.dp)
+                                                .align(Alignment.TopEnd)
+                                                .height(25.dp)
+                                                .clip(RoundedCornerShape(15.dp))
+                                                .background(Color.White)
+
+                                        ){
+                                            Text(
+                                                modifier = Modifier
+                                                    .align(Alignment.Center)
+                                                    .padding(horizontal = 3.dp),
+                                                textAlign = TextAlign.Start,
+                                                fontSize = 17.sp,
+                                                text = "${image + 1}/${images.size}"
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.Black)
+                                .padding(5.dp)
+                        ){
+                            Text(
+                                text = "Name :" + game.name_original,
+                                modifier = Modifier.fillMaxWidth(),
+                                color = Color.White,
+                                textAlign = TextAlign.Start,
+                                fontSize = 17.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                            Text(
+                                text = "Date Released :" + game.released,
+                                modifier = Modifier.fillMaxWidth(),
+                                color = Color.White,
+                                textAlign = TextAlign.Start,
+                            )
+                            Text(
+                                text = "Requirements : " ,
+                                modifier = Modifier.fillMaxWidth(),
+                                color = Color.White,
+                                textAlign = TextAlign.Start,
+                                textDecoration = TextDecoration.Underline,
+                                fontSize = 15.sp,
+                            )
+                            Text(
+                                text = game.description_raw,
+                                modifier = Modifier.fillMaxWidth(),
+                                color = Color.White,
+                                textAlign = TextAlign.Start,
+                            )
+                            Text(
+                                text = "Supported Platforms : " ,
+                                modifier = Modifier.fillMaxWidth(),
+                                color = Color.White,
+                                textAlign = TextAlign.Start,
+                                textDecoration = TextDecoration.Underline,
+                                fontSize = 15.sp,
+                            )
+                            Spacer(modifier = Modifier.height(20.dp))
+                            LazyRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 5.dp)
+                            ) {
+                                items(game.platforms) { platform ->
+                                    GamePlatformCard( platform = platform)
+                                    Spacer(modifier = Modifier.width(10.dp))
+
+                                }
+                            }
+
                         }
                     }
                 }

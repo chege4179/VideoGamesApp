@@ -5,6 +5,7 @@ import com.peterchege.gamesapp.data.api.responses.game_models.GetGamesResponse
 import com.peterchege.gamesapp.data.api.responses.game_models.NetworkGame
 import com.peterchege.gamesapp.data.api.responses.platform_models.NetworkPlatform
 import com.peterchege.gamesapp.data.api.responses.platform_models.asExternalModel
+import com.peterchege.gamesapp.data.api.responses.search_game_models.SearchGameResponse
 import com.peterchege.gamesapp.data.api.responses.single_game_model.SingleGame
 import com.peterchege.gamesapp.domain.models.Platform
 import kotlinx.coroutines.flow.Flow
@@ -26,6 +27,10 @@ class VideoGamesAppNetworkDataSource @Inject constructor(
 
     suspend fun getGameById(id:String):SingleGame{
         return api.getGameById(id = id)
+    }
+
+    suspend fun searchGames(pageSize:Int,page :Int,searchTerm:String):SearchGameResponse{
+        return api.searchGames(pageSize = pageSize, page = page, searchTerm = searchTerm)
     }
 
 }

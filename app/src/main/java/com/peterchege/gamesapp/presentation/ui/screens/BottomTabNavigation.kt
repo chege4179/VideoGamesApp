@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Computer
+import androidx.compose.material.icons.outlined.SportsEsports
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,12 +44,12 @@ fun BottomTabNavigation(
                     BottomNavItem(
                         name="Home",
                         route = Screens.ALL_GAMES_SCREEN  ,
-                        icon = Icons.Default.Home
+                        icon = Icons.Outlined.SportsEsports
                     ),
                     BottomNavItem(
-                        name="Add",
+                        name="Platforms",
                         route = Screens.ALL_PLATFORMS_SCREEN   ,
-                        icon = Icons.Default.AddCircle
+                        icon = Icons.Outlined.Computer
                     ),
 
 
