@@ -1,19 +1,34 @@
+plugins {
+    id("com.diffplug.spotless") version "5.3.0"
+    id ("com.android.application") version "8.1.1" apply false
+    id( "com.android.library") version "8.1.1" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.10" apply false
+    id("org.jetbrains.kotlin.jvm") version "1.9.10" apply false
+    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+}
+
+subprojects{
+    apply(plugin = "com.google.devtools.ksp")
+    apply(plugin = "dagger.hilt.android.plugin")
+}
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
 
-    }
     dependencies {
-        classpath ("com.android.tools.build:gradle:7.3.1")
-        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20")
-        classpath ("com.google.dagger:hilt-android-gradle-plugin:2.44.2")
-
-
+        classpath ("com.google.dagger:hilt-android-gradle-plugin:2.48")
+        classpath ("com.google.gms:google-services:4.4.0")
+        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
+        classpath( "org.jetbrains.kotlin:kotlin-serialization:1.9.10")
     }
 
 }
 
-tasks.register("clean",Delete::class){
-    delete(rootProject.buildDir)
+apply(plugin = "com.diffplug.spotless")
+spotless {
+    kotlin {
+        target("**/*.kt")
+        licenseHeaderFile(
+            rootProject.file("${project.rootDir}/spotless/LICENSE.txt"),
+            "^(package|object|import|interface)"
+        )
+    }
 }

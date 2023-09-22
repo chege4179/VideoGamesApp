@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Games App
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.peterchege.gamesapp
 
 import android.os.Bundle
@@ -8,8 +23,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.peterchege.gamesapp.presentation.AppNavigation
-import com.peterchege.gamesapp.presentation.ui.theme.GamesAppTheme
+import com.peterchege.gamesapp.presentation.navigation.AppNavigation
+import com.peterchege.gamesapp.presentation.theme.GamesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
