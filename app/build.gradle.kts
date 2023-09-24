@@ -66,6 +66,8 @@ dependencies {
     debugImplementation ("androidx.compose.ui:ui-tooling:1.5.1")
     debugImplementation ("androidx.compose.ui:ui-test-manifest:1.5.1")
 
+    implementation ("androidx.navigation:navigation-compose:2.7.3")
+
     // compose icons
     implementation ("androidx.compose.material:material-icons-extended:1.6.0-alpha05")
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
@@ -74,7 +76,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
-    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 
     // view model
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
@@ -100,10 +102,10 @@ dependencies {
     implementation( "io.coil-kt:coil-compose:2.4.0")
 
     // room
-    implementation("androidx.room:room-runtime:2.6.0-beta01")
-    ksp("androidx.room:room-compiler:2.6.0-beta01")
-    implementation("androidx.room:room-ktx:2.6.0-beta01")
-    implementation("androidx.room:room-paging:2.6.0-beta01")
+    implementation("androidx.room:room-runtime:2.6.0-rc01")
+    ksp("androidx.room:room-compiler:2.6.0-rc01")
+    implementation("androidx.room:room-ktx:2.6.0-rc01")
+    implementation("androidx.room:room-paging:2.6.0-rc01")
 
 
 
