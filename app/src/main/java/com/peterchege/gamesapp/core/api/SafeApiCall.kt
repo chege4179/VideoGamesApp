@@ -18,22 +18,26 @@ package com.peterchege.gamesapp.core.api
 import com.peterchege.gamesapp.core.util.NetworkResult
 import retrofit2.HttpException
 import retrofit2.Response
+import timber.log.Timber
 
 suspend fun <T : Any> safeApiCall(
     execute: suspend () -> Response<T>
 ): NetworkResult<T> {
+    val TAG ="Network Error"
     return try {
         val response = execute()
         val body = response.body()
         if (response.isSuccessful && body != null) {
             NetworkResult.Success(body)
         } else {
+            Timber.tag(TAG).i("Error in else >>> ${response}")
             NetworkResult.Error(code = response.code(), message = response.message())
         }
     } catch (e: HttpException) {
-
+        Timber.tag(TAG).i("http exception >>> ${e}")
         NetworkResult.Error(code = e.code(), message = e.message())
     } catch (e: Throwable) {
+        Timber.tag(TAG).i("io exception >>> ${e}")
         println("The error causing this is ----->" + e.localizedMessage)
         NetworkResult.Exception(e)
     }

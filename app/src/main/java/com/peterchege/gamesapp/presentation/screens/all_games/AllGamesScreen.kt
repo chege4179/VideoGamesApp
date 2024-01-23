@@ -20,7 +20,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
@@ -37,7 +37,7 @@ import com.peterchege.gamesapp.presentation.components.GamesCard
 import com.peterchege.gamesapp.core.util.Screens
 
 
-@OptIn(ExperimentalCoilApi::class)
+@OptIn(ExperimentalCoilApi::class, ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AllGamesScreen(
@@ -83,15 +83,16 @@ fun AllGamesScreen(
                     }
 
                 },
-                backgroundColor = MaterialTheme.colors.primary
-            )
+
+                )
         }
-        ) {
+    ) { paddingValues ->
         val gamesData = viewModel.gamesPager.collectAsLazyPagingItems()
         if (gamesData.itemCount == 0) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(paddingValues)
                     .padding(8.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
@@ -100,7 +101,10 @@ fun AllGamesScreen(
             }
         } else {
             LazyVerticalGrid(
-                modifier = Modifier.fillMaxSize().background(Color.Black),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(Color.Black),
                 columns = GridCells.Fixed(2)
 
             ) {
@@ -128,6 +132,7 @@ fun AllGamesScreen(
                             }
                         }
                     }
+
                     is LoadState.Error -> {
                         item {
                             Row(

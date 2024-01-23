@@ -25,7 +25,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -45,7 +45,7 @@ import coil.compose.SubcomposeAsyncImage
 
 import com.peterchege.gamesapp.presentation.components.GamePlatformCard
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun GamesScreen(
@@ -68,8 +68,12 @@ fun GamesScreen(
                 }
             )
         }
-    ) {
-        Box(modifier = Modifier.fillMaxSize()) {
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
             if (viewModel.isLoading.value) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
@@ -77,23 +81,24 @@ fun GamesScreen(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    if (game.background_image == null && game.background_image_additional == null){
-                        item{
+                    if (game.background_image == null && game.background_image_additional == null) {
+                        item {
                             Text(text = "No Image available")
                         }
 
-                    }else{
-                        if(game.background_image_additional == null && game.background_image != null){
+                    } else {
+                        if (game.background_image_additional == null && game.background_image != null) {
                             val images = listOf<String>(game.background_image)
                             item {
-                                val pagerState1 = rememberPagerState(initialPage = 0, pageCount = { images.size })
+                                val pagerState1 =
+                                    rememberPagerState(initialPage = 0, pageCount = { images.size })
                                 val coroutineScope = rememberCoroutineScope()
                                 HorizontalPager(
                                     state = pagerState1
                                 ) { image ->
                                     Box(
                                         modifier = Modifier.fillMaxWidth()
-                                    ){
+                                    ) {
                                         SubcomposeAsyncImage(
                                             model = images[image],
                                             loading = {
@@ -120,7 +125,7 @@ fun GamesScreen(
                                                 .clip(RoundedCornerShape(15.dp))
                                                 .background(Color.White)
 
-                                        ){
+                                        ) {
                                             Text(
                                                 modifier = Modifier
                                                     .align(Alignment.Center)
@@ -133,17 +138,21 @@ fun GamesScreen(
                                     }
                                 }
                             }
-                        }else if(game.background_image_additional != null && game.background_image != null){
-                            val images = listOf<String>(game.background_image,game.background_image_additional)
+                        } else if (game.background_image_additional != null && game.background_image != null) {
+                            val images = listOf<String>(
+                                game.background_image,
+                                game.background_image_additional
+                            )
                             item {
-                                val pagerState1 = rememberPagerState(initialPage = 0, pageCount = { images.size })
+                                val pagerState1 =
+                                    rememberPagerState(initialPage = 0, pageCount = { images.size })
                                 val coroutineScope = rememberCoroutineScope()
                                 HorizontalPager(
                                     state = pagerState1
                                 ) { image ->
                                     Box(
                                         modifier = Modifier.fillMaxWidth()
-                                    ){
+                                    ) {
                                         SubcomposeAsyncImage(
                                             model = images[image],
                                             loading = {
@@ -170,7 +179,7 @@ fun GamesScreen(
                                                 .clip(RoundedCornerShape(15.dp))
                                                 .background(Color.White)
 
-                                        ){
+                                        ) {
                                             Text(
                                                 modifier = Modifier
                                                     .align(Alignment.Center)
@@ -192,7 +201,7 @@ fun GamesScreen(
                                 .fillMaxSize()
                                 .background(Color.Black)
                                 .padding(5.dp)
-                        ){
+                        ) {
                             Text(
                                 text = "Name :" + game.name_original,
                                 modifier = Modifier.fillMaxWidth(),
@@ -208,7 +217,7 @@ fun GamesScreen(
                                 textAlign = TextAlign.Start,
                             )
                             Text(
-                                text = "Requirements : " ,
+                                text = "Requirements : ",
                                 modifier = Modifier.fillMaxWidth(),
                                 color = Color.White,
                                 textAlign = TextAlign.Start,
@@ -222,7 +231,7 @@ fun GamesScreen(
                                 textAlign = TextAlign.Start,
                             )
                             Text(
-                                text = "Supported Platforms : " ,
+                                text = "Supported Platforms : ",
                                 modifier = Modifier.fillMaxWidth(),
                                 color = Color.White,
                                 textAlign = TextAlign.Start,
@@ -236,7 +245,7 @@ fun GamesScreen(
                                     .padding(bottom = 5.dp)
                             ) {
                                 items(items = game.platforms) { platform ->
-                                    GamePlatformCard( platform = platform)
+                                    GamePlatformCard(platform = platform)
                                     Spacer(modifier = Modifier.width(10.dp))
 
                                 }

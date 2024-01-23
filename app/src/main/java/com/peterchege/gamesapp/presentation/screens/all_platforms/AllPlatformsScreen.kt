@@ -19,10 +19,11 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,12 +36,12 @@ import coil.annotation.ExperimentalCoilApi
 import com.peterchege.gamesapp.presentation.components.PlatformCard
 
 
-@OptIn(ExperimentalCoilApi::class)
+@OptIn(ExperimentalCoilApi::class, ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AllPlatformsScreen(
     navController: NavController,
-    viewModel : AllPlatformsScreenViewModel = hiltViewModel()
+    viewModel: AllPlatformsScreenViewModel = hiltViewModel()
 ) {
     val platformsData = viewModel.platformsPager.collectAsLazyPagingItems()
 
@@ -55,20 +56,23 @@ fun AllPlatformsScreen(
             )
         }
 
-    ) {
-        if (platformsData.itemCount == 0){
+    ) { paddingValues ->
+        if (platformsData.itemCount == 0) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(paddingValues)
                     .padding(8.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 CircularProgressIndicator()
             }
-        }else{
+        } else {
             LazyVerticalGrid(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 columns = GridCells.Fixed(2)
 
             ) {
@@ -95,6 +99,7 @@ fun AllPlatformsScreen(
                             }
                         }
                     }
+
                     is LoadState.Error -> {
                         item {
                             Row(

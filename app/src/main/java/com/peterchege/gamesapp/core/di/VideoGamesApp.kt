@@ -17,6 +17,13 @@ package com.peterchege.gamesapp.core.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 @HiltAndroidApp
-class VideoGamesApp :Application()
+class VideoGamesApp :Application(){
+
+    override fun onCreate() {
+        super.onCreate()
+        Timber.plant(Timber.DebugTree())
+    }
+}

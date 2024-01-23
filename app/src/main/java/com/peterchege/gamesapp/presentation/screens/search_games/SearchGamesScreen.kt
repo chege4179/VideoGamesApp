@@ -26,7 +26,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.Search
@@ -54,7 +54,11 @@ import kotlinx.coroutines.delay
 fun SearchGameScreenPreview() {
     SearchGamesScreen(navController = rememberNavController())
 }
-fun LazyListState.isScrolledToEnd() = layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
+
+fun LazyListState.isScrolledToEnd() =
+    layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
+
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SearchGamesScreen(
@@ -69,13 +73,13 @@ fun SearchGamesScreen(
             scrollState.isScrolledToEnd()
         }
     }
-    LaunchedEffect(key1 = viewModel.searchTerm.value){
-        Log.e("Change",viewModel.searchTerm.value)
+    LaunchedEffect(key1 = viewModel.searchTerm.value) {
+        Log.e("Change", viewModel.searchTerm.value)
         delay(500L)
         viewModel.searchGame()
     }
 
-    LaunchedEffect(key1 = endOfListReached){
+    LaunchedEffect(key1 = endOfListReached) {
         viewModel.updateSearchPage()
         viewModel.searchGame()
 
@@ -116,9 +120,7 @@ fun SearchGamesScreen(
                         keyboardType = KeyboardType.Text,
                     ),
                     colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
                         disabledTextColor = MainWhiteColor,
-                        backgroundColor = MainWhiteColor,
                         focusedIndicatorColor = MainWhiteColor,
                         unfocusedIndicatorColor = MainWhiteColor,
                         disabledIndicatorColor = MainWhiteColor
@@ -161,10 +163,12 @@ fun SearchGamesScreen(
                 }
             }
         },
-    ) {
+    ) { paddingValues ->
         if (viewModel.searchGameResults.value.isEmpty()) {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -175,9 +179,10 @@ fun SearchGamesScreen(
                 state = scrollState,
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(paddingValues)
                     .padding(10.dp)
             ) {
-                items(items =  viewModel.searchGameResults.value) {
+                items(items = viewModel.searchGameResults.value) {
                     SearchGameItem(
                         game = it,
                         onNavigateToGameScreen = {

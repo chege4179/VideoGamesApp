@@ -15,25 +15,24 @@
  */
 package com.peterchege.gamesapp.presentation.navigation
 
-import com.peterchege.gamesapp.core.util.Screens
-
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Computer
 import androidx.compose.material.icons.outlined.SportsEsports
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -41,6 +40,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.peterchege.gamesapp.core.util.Screens
 import com.peterchege.gamesapp.presentation.screens.all_games.AllGamesScreen
 import com.peterchege.gamesapp.presentation.screens.all_platforms.AllPlatformsScreen
 
@@ -85,7 +85,6 @@ fun BottomTabNavigation(
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BottomNavBar(
     items:List<BottomNavItem>,
@@ -94,17 +93,14 @@ fun BottomNavBar(
     onItemClick:(BottomNavItem) -> Unit
 ){
     val backStackEntry = navController.currentBackStackEntryAsState()
-    BottomNavigation(
+    NavigationBar(
         modifier = modifier,
-        backgroundColor = Color.DarkGray,
-        elevation = 5.dp
+
     ) {
         items.forEach{ item ->
             val selected = item.route == backStackEntry.value?.destination?.route
-            BottomNavigationItem(
+            NavigationBarItem(
                 selected =selected ,
-                selectedContentColor = Color.Blue,
-                unselectedContentColor = Color.Gray,
                 onClick = { onItemClick(item) },
                 icon = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
